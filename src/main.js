@@ -4,7 +4,7 @@ const {app} = require("./server.js")
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Example app running on port https://localhost:${PORT}`)
+  console.log(`Example app running on port http://localhost:${PORT}`)
 });
 
 // const { getPokemonName } = require("./getPokemonName");
