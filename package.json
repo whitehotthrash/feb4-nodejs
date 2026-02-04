@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/whitehotthrash/feb4-nodejs/issues"
   },
-  "homepage": "https://github.com/whitehotthrash/feb4-nodejs#readme"
+  "homepage": "https://github.com/whitehotthrash/feb4-nodejs#readme",
+  "dependencies": {
+    "pokemon": "^3.3.0"
+  }
 }
