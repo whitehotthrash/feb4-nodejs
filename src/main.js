@@ -1,3 +1,12 @@
+const {app} = require("./server.js")
+
+// grab the port value from the environment
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Example app running on port https://localhost:${PORT}`)
+});
+
 // const { getPokemonName } = require("./getPokemonName");
 // method 1 for importing and using stuff from packages
 //const pokemon = require("pokemon"); // object that has a property that can access data
@@ -5,10 +14,10 @@
 
 // method 2 for importing and using stuff from packages
 // object destructuring
-const {random} = require("pokemon");
-console.log(random()) // generic named
-const {random: alias} = require("pokemon");
-console.log(alias()) // alias
+// const {random} = require("pokemon");
+// console.log(random()) // generic named
+// const {random: alias} = require("pokemon");
+// console.log(alias()) // alias name
 
 
 // // Import a function and run it

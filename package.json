@@ -5,7 +5,8 @@
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/main.js"
+    "start": "node ./src/main.js",
+    "dev": "nodemon ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,10 @@
   },
   "homepage": "https://github.com/whitehotthrash/feb4-nodejs#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "pokemon": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }
