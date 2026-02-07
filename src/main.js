@@ -19,6 +19,7 @@ app.listen(PORT, () => {
 // const {random: alias} = require("pokemon");
 // console.log(alias()) // alias name
 
+// go over all of this again soon
 
 // // Import a function and run it
 // async function app() {
