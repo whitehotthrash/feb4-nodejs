@@ -22,6 +22,7 @@
   "homepage": "https://github.com/whitehotthrash/feb4-nodejs#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^8.22.1",
     "pokemon": "^3.3.0"
   },
   "devDependencies": {
