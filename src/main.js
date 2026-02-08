@@ -1,10 +1,53 @@
-const {app} = require("./server.js")
+const { app } = require("./server.js");
+const mongoose = require("mongoose");
+
+async function dbConnect() {
+  try {
+    await mongoose.connect("mongodb://localhost:27017/CoderIsAwesome");
+    console.log("Database connect!");
+  } catch (error) {
+    console.log(`dbConnect failed! Error:\n${JSON.stringify(error)}`);
+  }
+}
+
+async function dbClose() {
+  await mongoose.connection.close();
+  console.log("Database disconnect!");
+}
+
+const Developer = mongoose.model("Developer", {
+  name: String,
+  skills: [String],
+});
+
+async function appFunction() {
+  await dbConnect();
+
+  let newDev = new Developer({
+    name: "Tim",
+    skills: ["HTML", "CSS", "JavaScript"],
+  });
+
+  await newDev
+    .save()
+    .then(() => {
+      console.log("Save successful!");
+    })
+    .catch((error) => {
+      console.log("Some error occurred:\n" + error);
+    });
+
+  console.log("Closing DB to prevent hanging...");
+  await dbClose();
+}
+
+appFunction();
 
 // grab the port value from the environment
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Example app running on port http://localhost:${PORT}`)
+  console.log(`Example app running on port http://localhost:${PORT}`);
 });
 
 // const { getPokemonName } = require("./getPokemonName");
