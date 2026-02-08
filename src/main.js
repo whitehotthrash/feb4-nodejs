@@ -13,7 +13,7 @@ async function dbConnect() {
 async function dbWipe(){
   console.log("Emptying database...");
   await mongoose.connection.db.dropDatabase();
-  console.log("Datanase has been wiped!");
+  console.log("Database has been wiped!");
 }
 
 async function dbClose() {
@@ -34,6 +34,13 @@ async function appFunction() {
     skills: ["HTML", "CSS", "JavaScript"],
   });
 
+  await Developer.create({
+    name:"Sam",
+    skills:["React, TypeScript"]
+  }).catch(error => {
+    console.log("An error occurred:\n" + error)
+  })
+
   await newDev
     .save()
     .then(() => {
@@ -43,6 +50,8 @@ async function appFunction() {
       console.log("Some error occurred:\n" + error);
     });
 
+  console.log("wiping db")
+  await dbWipe();
   console.log("Closing DB to prevent hanging...");
   await dbClose();
 }
