@@ -10,7 +10,7 @@ async function dbConnect() {
   }
 }
 
-async function dbWipe(){
+async function dbWipe() {
   console.log("Emptying database...");
   await mongoose.connection.db.dropDatabase();
   console.log("Database has been wiped!");
@@ -34,14 +34,31 @@ async function appFunction() {
     skills: ["HTML", "CSS", "JavaScript"],
   });
 
-  await Developer.create({
-    name:"Sam",
-    skills:["React, TypeScript"]
-  }).catch(error => {
-    console.log("An error occurred:\n" + error)
-  })
+  let irynaDev = new Developer({
+    //named dev
+    name: "Iryna",
+    skills: ["HTML", "CSS", "JavaScript"],
+  });
+  let glenDev = new Developer({
+    //named dev
+    name: "Glen",
+    skills: ["HTML", "CSS", "JavaScript"],
+  });
 
-  await newDev
+  await Developer.create({
+    name: "Sam",
+    skills: ["React, TypeScript"],
+  }).catch((error) => {
+    console.log("An error occurred:\n" + error);
+  });
+
+  // Faster than Model.create([]) by attemping to create & save all objects at once
+  // If any documents cause an error, no documents will be saved at all.
+  await Developer.insertMany([irynaDev, glenDev]).catch((error) => {
+    console.log("Some error occurred saving data!:\n" + error);
+  });
+
+  await newDev // longform saved dev
     .save()
     .then(() => {
       console.log("Save successful!");
@@ -50,8 +67,8 @@ async function appFunction() {
       console.log("Some error occurred:\n" + error);
     });
 
-  console.log("wiping db")
-  await dbWipe();
+  //console.log("wiping db")
+  //await dbWipe();
   console.log("Closing DB to prevent hanging...");
   await dbClose();
 }
