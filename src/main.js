@@ -10,6 +10,12 @@ async function dbConnect() {
   }
 }
 
+async function dbWipe(){
+  console.log("Emptying database...");
+  await mongoose.connection.db.dropDatabase();
+  console.log("Datanase has been wiped!");
+}
+
 async function dbClose() {
   await mongoose.connection.close();
   console.log("Database disconnect!");
