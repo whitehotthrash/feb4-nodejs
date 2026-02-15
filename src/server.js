@@ -16,6 +16,8 @@ app.post("/", (request, response) => {
   response.json({ message: "Received POST request" });
 });
 
+//TODO: PATCH and DELETE endpoints
+
 module.exports = {
   app: app,
 };
