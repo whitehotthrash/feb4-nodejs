@@ -28,6 +28,9 @@ const Developer = mongoose.model("Developer", {
 
 async function appFunction() {
   await dbConnect();
+  // delete db before setting up
+  console.log("wiping db")
+  await dbWipe();
 
   let newDev = new Developer({
     name: "Tim",
@@ -78,8 +81,6 @@ async function appFunction() {
     let updatedSamDev = await foundSamDev.save();
     console.log("Sam data updated and saved to the database:\n" + JSON.stringify(updatedSamDev));
 
-  //console.log("wiping db")
-  //await dbWipe();
   console.log("Closing DB to prevent hanging...");
   await dbClose();
 }
