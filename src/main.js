@@ -29,7 +29,7 @@ const Developer = mongoose.model("Developer", {
 async function appFunction() {
   await dbConnect();
   // delete db before setting up
-  console.log("wiping db")
+  console.log("wiping db");
   await dbWipe();
 
   let newDev = new Developer({
@@ -75,11 +75,15 @@ async function appFunction() {
   console.log("Arbitrarily-chosen developer is: " + arbitraryDev.name);
 
   // update developer after finding them
-  let foundSamDev = await Developer.findOne({name:"Sam"}).exec();
-    foundSamDev.skills.push("Ruby")
-    // document.save() returns the document that was saved to the database
-    let updatedSamDev = await foundSamDev.save();
-    console.log("Sam data updated and saved to the database:\n" + JSON.stringify(updatedSamDev));
+  let foundSamDev = await Developer.findOne({ name: "Sam" }).exec();
+  foundSamDev.skills.push("Ruby");
+  
+  // document.save() returns the document that was saved to the database
+  let updatedSamDev = await foundSamDev.save();
+  console.log(
+    "Sam data updated and saved to the database:\n" +
+      JSON.stringify(updatedSamDev),
+  );
 
   console.log("Closing DB to prevent hanging...");
   await dbClose();
