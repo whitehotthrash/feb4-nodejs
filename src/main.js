@@ -26,11 +26,17 @@ const Developer = mongoose.model("Developer", {
   skills: [String],
 });
 
+const Company = mongoose.model('Company', {
+    name: String,
+    employees: [String]
+});
+
 async function appFunction() {
   await dbConnect();
+  
   // delete db before setting up
-  console.log("wiping db");
-  await dbWipe();
+  // console.log("wiping db");
+  // await dbWipe();
 
   let newDev = new Developer({
     name: "Tim",
@@ -77,13 +83,73 @@ async function appFunction() {
   // update developer after finding them
   let foundSamDev = await Developer.findOne({ name: "Sam" }).exec();
   foundSamDev.skills.push("Ruby");
-  
+
   // document.save() returns the document that was saved to the database
   let updatedSamDev = await foundSamDev.save();
   console.log(
     "Sam data updated and saved to the database:\n" +
       JSON.stringify(updatedSamDev),
   );
+
+  //     // Create a document instance
+  //   let newAlexDev = new Developer({
+  //       name:"Alex",
+  //       skills:["HTML", "CSS", "JavaScript"]
+  //   });
+
+  //   // Save the document to the database
+  //   await newAlexDev.save().then(() => {
+  //       console.log("Alex save successful!");
+  //   }).catch(error => {
+  //       console.log("Some error occurred saving data!:\n" + error)
+  //   });
+
+  //   // Create a document instance
+  //   let newJairoDev = new Developer({
+  //       name:"Jairo",
+  //       skills:["HTML", "CSS", "JavaScript"]
+  //   });
+
+  //   // Save the document to the database
+  //   await newJairoDev.save().then(() => {
+  //       console.log("Jairo save successful!");
+  //   }).catch(error => {
+  //       console.log("Some error occurred saving data!:\n" + error)
+  //   });
+
+  // // Create a document instance
+  // let newCoderCompany = new Company({
+  //   name: "Coder Academy",
+  //   // Use other document instances' data to fill data in the company
+  //   // Note that _id must be forced as a string via toString()
+  //   // otherwise it can behave inconsistently (eg. it can be an object)
+  //   employees: [newAlexDev._id.toString(), newJairoDev._id.toString()],
+  // });
+
+  // // Check what data we ended up with in the company regarding employees:
+  // console.log("Company has employees: " + newCoderCompany.employees);
+
+  // // Save the document to the database
+  // await newCoderCompany
+  //   .save()
+  //   .then(() => {
+  //     console.log("Company save successful!");
+  //   })
+  //   .catch((error) => {
+  //     console.log("Some error occurred saving data!:\n" + error);
+  //   });
+
+  // // Work with referenced data
+  // let companyEmployeeMessage = "Company has employees: ";
+
+  // // Not all loops work well with async/await functions
+  // // for...of loops work great!
+  // for (const dev of newCoderCompany.employees) {
+  //   let devObj = await Developer.findById(dev).exec();
+  //   console.log(`${devObj.name} works at ${newCoderCompany.name}!`);
+  //   companyEmployeeMessage += devObj.name + ", ";
+  // }
+  // console.log(companyEmployeeMessage);
 
   console.log("Closing DB to prevent hanging...");
   await dbClose();
